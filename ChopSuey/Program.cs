@@ -32,6 +32,10 @@ namespace ChopSuey
         //TODO: Parameterize start/stop/continuous
         //TODO: Add persistence
         //TODO: Add imports/assemblies? (make sure init can new-up Expandos)
+        // > Expando
+        // > RegExp
+        // > LINQ
+        // > MoreLinq
         //TODO: Add filter logs
     }
 }
