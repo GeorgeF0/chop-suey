@@ -1,4 +1,5 @@
 ﻿using System;
+using ChopSuey.Model;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 

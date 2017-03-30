@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Streak.Core;
 
-namespace ChopSuey
+namespace ChopSuey.Model
 {
     public class AggregateQuery
     {
@@ -20,6 +20,7 @@ namespace ChopSuey
 
         public string InitStr { get; private set; }
         public string AggregateStr { get; private set; }
+        public string Description { get; private set; }
 
         public string State
         {
@@ -32,7 +33,7 @@ namespace ChopSuey
             }
         }
 
-        public AggregateQuery(string streak, string init, string aggregate)
+        public AggregateQuery(string streak, string init, string aggregate, string description)
         {
             //Compile lambdas
             Init = LambdaCompiler.CreateInit(init);
@@ -40,6 +41,7 @@ namespace ChopSuey
 
             InitStr = init;
             AggregateStr = aggregate;
+            Description = description;
 
             //Create reader streak
             _streak = new Streak.Core.Streak(streak).Get(continuous: true);
