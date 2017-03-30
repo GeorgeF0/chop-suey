@@ -1,4 +1,5 @@
-﻿using ChopSuey.Model;
+﻿using System.Linq;
+using ChopSuey.Model;
 using Nancy;
 using Nancy.ModelBinding;
 
@@ -21,6 +22,20 @@ namespace ChopSuey
 
                 return HttpStatusCode.Created;
             };
+
+            Get["/query"] = _ =>
+            {
+                lock (state)
+                {
+                    return state.Queries.Select(x => new QuerySummary
+                    {
+                        Hits = x.Hits,
+                        Errors = x.Errors,
+                        Description = x.Description,
+                        State = x.State
+                    });
+                }
+            };
         }
     }
 
@@ -30,5 +45,13 @@ namespace ChopSuey
         public string Init { get; set; }
         public string Aggregate { get; set; }
         public string Description { get; set; }
+    }
+
+    public class QuerySummary
+    {
+        public int Hits { get; set; }
+        public int Errors { get; set; }
+        public string Description { get; set; }
+        public string State { get; set; }
     }
 }
