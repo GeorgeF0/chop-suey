@@ -62,6 +62,7 @@ function Query() {
 
 function AppViewModel() {
     this.query = new Query();
+    this.running = ko.observableArray([]);
 }
 
 var viewModel = new AppViewModel();
@@ -79,3 +80,10 @@ function createQuery() {
         .done(() => { viewModel.query.lastQueryStatus("success"); })
         .fail(error => { viewModel.query.lastQueryStatus("error"); viewModel.query.lastError(error.responseText); });
 }
+
+// Setup
+
+setInterval(() => {
+    $.get("api/query")
+        .done(data => viewModel.running(data));
+}, 1000);

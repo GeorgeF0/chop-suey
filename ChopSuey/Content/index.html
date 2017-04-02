@@ -63,14 +63,19 @@
                     <div class="panel-heading">
                         <h1 class="panel-title">Running Queries</h1>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" data-bind="foreach: running">
                         <!-- template for aggregate query widget-->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Query title <span class="glyphicon glyphicon-ok" style="color: #5cb85c" aria-hidden="true"></span>15 <span class="glyphicon glyphicon-remove" style="color: #d9534f" aria-hidden="true"></span>3</h3>
+                                <h3 class="panel-title">
+                                    <span data-bind="text: description"></span> 
+                                    <span class="glyphicon glyphicon-ok" style="color: #5cb85c" aria-hidden="true"></span>
+                                    <span data-bind="text: hits"></span>
+                                    <span class="glyphicon glyphicon-remove" style="color: #d9534f" aria-hidden="true"></span>
+                                    <span data-bind="text: errors"></span>
+                                </h3>
                             </div>
-                            <div class="panel-body">
-                                Panel content
+                            <div class="panel-body" data-bind="text: state">
                             </div>
                         </div>
                     </div>
@@ -80,6 +85,5 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>

@@ -35,6 +35,10 @@ namespace ChopSuey.Model
 
         public AggregateQuery(string streak, string init, string aggregate, string description)
         {
+            if (streak == null) throw new Exception("Streak cannot be null!");
+            if (init == null) throw new Exception("Init function cannot be null!");
+            if (aggregate == null) throw new Exception("Aggregate function cannot be null!");
+
             //Compile lambdas
             Init = LambdaCompiler.CreateInit(init);
             Aggregate = LambdaCompiler.CreateLambda(aggregate);
@@ -45,14 +49,15 @@ namespace ChopSuey.Model
 
             //Create reader streak
             _streak = new Streak.Core.Streak(streak).Get(continuous: true);
+
+            //Initialize state
+            _state = Init();
         }
 
         public Task Run()
         {
             return Task.Factory.StartNew(() =>
             {
-                _state = Init();
-
                 foreach (var e in _streak)
                 {
                     try
