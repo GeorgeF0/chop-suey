@@ -22,10 +22,7 @@ namespace ChopSuey
         }
 
         //TODO: Show aggregate query on UI (add pretty printing JSON)
-        // > Add panel to house the query widgets
-        // > Create widget template with header (description, hits, errors, etc) and pretty print state
-        // > Poll every 1 second and gather all running aggregate queries
-        // > Show the queries in the panel by binding to template
+        // > Pretty print state
         // > Add "i" (info) icon with Init and Aggregate strings as tooltips
         //TODO: Add support for Text and Binary query types
         //TODO: Parameterize start/stop/continuous
