@@ -21,9 +21,6 @@ namespace ChopSuey
             }
         }
 
-        //TODO: Add queries from UI
-        // > Make HTTP request to api/query when button is clicked
-        // > Show green or red alert when query succeeds/fails respectively
         //TODO: Show aggregate query on UI (add pretty printing JSON)
         // > Add panel to house the query widgets
         // > Create widget template with header (description, hits, errors, etc) and pretty print state

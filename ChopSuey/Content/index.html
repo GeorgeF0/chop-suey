@@ -8,14 +8,13 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="style.css"/>
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
 
     <div class="container-fluid">
 
@@ -34,24 +33,25 @@
                         <h1 class="panel-title">Add Query</h1>
                     </div>
                     <div class="panel-body">
+                        <div class="alert" role="alert" data-bind="css: {'alert-info': query.alertClassIsInfo(), 'alert-danger': query.alertClassIsDanger(), 'alert-success': query.alertClassIsSuccess()}"><strong data-bind="text: query.alertStrongText()"></strong><p data-bind="text: query.alertDetails()"></p></div>
                         <div class="form-group">
                             <label>Streak</label>
-                            <input class="form-control" placeholder="Streak location" />
+                            <input class="form-control" placeholder="Streak location" data-bind="value: query.streak" />
                         </div>
                         <div class="form-group">
                             <label>Initialization</label>
-                            <input class="form-control" placeholder="Func&lt;state:dynamic&gt;" />
+                            <input class="form-control" placeholder="Func&lt;state:dynamic&gt;" data-bind="value: query.init" />
                         </div>
                         <div class="form-group">
                             <label>Aggregate Query</label>
-                            <input class="form-control" placeholder="Action&lt;streak event:Event, data:dynamic, state:dynamic&gt;" />
+                            <input class="form-control" placeholder="Action&lt;streak event:Event, data:dynamic, state:dynamic&gt;" data-bind="value: query.aggregate" />
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <input class="form-control" placeholder="Friendly name" />
+                            <input class="form-control" placeholder="Friendly name" data-bind="value: query.description" />
                         </div>
 
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary" onclick="createQuery()">Create</button>
                     </div>
                 </div>
             </div>
@@ -78,5 +78,8 @@
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
