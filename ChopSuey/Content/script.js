@@ -39,23 +39,23 @@ function Query() {
 
     this.alertStrongText = ko.computed(() => {
         switch (this.lastQueryStatus()) {
-        case "success":
-            return "Success!";
-        case "error":
-            return "Error: ";
-        default:
-            return "Info: ";
+            case "success":
+                return "Success!";
+            case "error":
+                return "Error: ";
+            default:
+                return "Info: ";
         }
     });
 
     this.alertDetails = ko.computed(() => {
         switch (this.lastQueryStatus()) {
-        case "success":
-            return "";
-        case "error":
-            return this.lastError();
-        default:
-            return "Add a query below";
+            case "success":
+                return "";
+            case "error":
+                return this.lastError();
+            default:
+                return "Add a query below";
         }
     });
 }
@@ -76,14 +76,20 @@ function createQuery() {
         init: viewModel.query.init(),
         aggregate: viewModel.query.aggregate(),
         description: viewModel.query.description()
-        })
+    })
         .done(() => { viewModel.query.lastQueryStatus("success"); })
         .fail(error => { viewModel.query.lastQueryStatus("error"); viewModel.query.lastError(error.responseText); });
 }
 
+function updateRunningQueries() {
+    $.get("api/query")
+        .done(data => {
+            viewModel.running(data);
+            setTimeout(updateRunningQueries, 1000);
+        })
+        .fail(() => setTimeout(updateRunningQueries, 1000));
+}
+
 // Setup
 
-setInterval(() => {
-    $.get("api/query")
-        .done(data => viewModel.running(data));
-}, 1000);
+updateRunningQueries();
