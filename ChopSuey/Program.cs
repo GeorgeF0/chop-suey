@@ -20,7 +20,7 @@ namespace ChopSuey
         //TODO: Add support for Text and Binary query types
         //TODO: Add syntax Highlighting to query input
         //TODO: Parameterize start/stop/continuous
-        //TODO: Add persistence
+        //TODO: Add footer to widgets with Delete, Copy State to Clipboard and Copy Query to Input buttons
         //TODO: Add imports/assemblies? (make sure init can new-up Expandos)
         // > Expando
         // > RegExp

@@ -7,17 +7,18 @@ namespace ChopSuey
 {
     public class Api : NancyModule
     {
-        public Api(IState state) : base("/api")
+        public Api(IState state, IStorage storage) : base("/api")
         {
             Post["/query"] = _ =>
             {
-                var query = this.Bind<QueryRequest>();
+                var query = this.Bind<AggregateQuery>();
 
                 lock (state)
                 {
-                    var aggregateQuery = new AggregateQuery(query.Streak, query.Init, query.Aggregate, query.Description);
-                    state.Queries.Add(aggregateQuery);
-                    aggregateQuery.Run();
+                    var runner = new AggregateQueryRunner(query);
+                    state.Queries.Add(runner);
+                    storage.Save(query);
+                    runner.Run();
                 }
 
                 return HttpStatusCode.Created;
@@ -31,20 +32,12 @@ namespace ChopSuey
                     {
                         Hits = x.Hits,
                         Errors = x.Errors,
-                        Description = x.Description,
+                        Description = x.Query.Description,
                         State = x.State
                     });
                 }
             };
         }
-    }
-
-    public class QueryRequest
-    {
-        public string Streak { get; set; }
-        public string Init { get; set; }
-        public string Aggregate { get; set; }
-        public string Description { get; set; }
     }
 
     public class QuerySummary

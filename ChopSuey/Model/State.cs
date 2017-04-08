@@ -4,11 +4,11 @@ namespace ChopSuey.Model
 {
     public interface IState
     {
-        List<AggregateQuery> Queries { get; }
+        List<AggregateQueryRunner> Queries { get; }
     }
 
     public class State : IState
     {
-        public List<AggregateQuery> Queries { get; } = new List<AggregateQuery>();
+        public List<AggregateQueryRunner> Queries { get; } = new List<AggregateQueryRunner>();
     }
 }
