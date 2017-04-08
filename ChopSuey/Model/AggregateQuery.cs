@@ -64,7 +64,7 @@ namespace ChopSuey.Model
                     {
                         dynamic data = JObject.Parse(e.Data);
 
-                        lock (_state) Aggregate(e, data, _state);
+                        lock (_state) Aggregate(e, data, ref _state);
 
                         Hits++;
                     }
@@ -79,5 +79,5 @@ namespace ChopSuey.Model
     }
 
     public delegate dynamic Init();
-    public delegate void Aggregate(Event evt, dynamic data, dynamic state);
+    public delegate void Aggregate(Event evt, dynamic data, ref dynamic state);
 }

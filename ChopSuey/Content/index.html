@@ -43,11 +43,14 @@
                         </div>
                         <div class="form-group">
                             <label>Initialization</label>
+                            <label style="display: block">() =></label>
                             <input class="form-control" placeholder="Func&lt;state:dynamic&gt;" data-bind="value: query.init" />
                         </div>
                         <div class="form-group">
                             <label>Aggregate Query</label>
-                            <input class="form-control" placeholder="Action&lt;streak event:Event, data:dynamic, state:dynamic&gt;" data-bind="value: query.aggregate" />
+                            <label style="display: block">(Event e, dynamic d, ref dynamic s) => {</label>
+                            <textarea class="form-control" rows="5" placeholder="Action&lt;streak event:Event, data:dynamic, state:dynamic&gt;" data-bind="value: query.aggregate"></textarea>
+                            <label>}</label>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
