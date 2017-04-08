@@ -21,10 +21,11 @@ namespace ChopSuey
             }
         }
 
-        //TODO: Show aggregate query on UI (add pretty printing JSON)
-        // > Pretty print state
+        //TODO: Show aggregate query on UI
         // > Add "i" (info) icon with Init and Aggregate strings as tooltips
         //TODO: Add support for Text and Binary query types
+        //TODO: Change state to ref
+        //TODO: Implied "() =>" and "(e, d, s) => {...}" lambdas
         //TODO: Parameterize start/stop/continuous
         //TODO: Add persistence
         //TODO: Add imports/assemblies? (make sure init can new-up Expandos)

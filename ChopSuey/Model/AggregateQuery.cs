@@ -28,7 +28,7 @@ namespace ChopSuey.Model
             {
                 lock (_state)
                 {
-                    return JsonConvert.SerializeObject(_state);
+                    return JsonConvert.SerializeObject(_state, Formatting.Indented);
                 }
             }
         }
