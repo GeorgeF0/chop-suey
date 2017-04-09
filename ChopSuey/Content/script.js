@@ -10,10 +10,6 @@ function copyToClipboard(text) {
     $temp.remove();
 }
 
-function copyStateToClipboard(element) {
-    copyToClipboard(element.state);
-}
-
 // Knockout and state
 
 ko.bindingHandlers.codemirror = {
@@ -75,6 +71,24 @@ var viewModel = new AppViewModel();
 ko.applyBindings(viewModel);
 
 // Functions
+
+function copyQueryToQueryInput(element) {
+    viewModel.query.streak(element.query.streak);
+    viewModel.query.init(element.query.init);
+    viewModel.query.aggregate(element.query.aggregate);
+    viewModel.query.description(element.query.description);
+}
+
+function copyStateToClipboard(element) {
+    copyToClipboard(element.state);
+}
+
+function deleteQuery(element) {
+    $.ajax({
+        url: "api/query/" + element.query.id,
+        type: "DELETE"
+    });
+}
 
 function createQuery() {
     $.post("api/query", {

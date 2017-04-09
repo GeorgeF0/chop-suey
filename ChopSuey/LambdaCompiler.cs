@@ -1,9 +1,13 @@
 ﻿using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using Streak.Core;
 
 namespace ChopSuey
 {
+    public delegate dynamic Init();
+    public delegate void Aggregate(Event evt, dynamic data, ref dynamic state);
+
     public class LambdaCompiler
     {
         private static ScriptOptions Options =>

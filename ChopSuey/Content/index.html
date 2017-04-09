@@ -74,7 +74,7 @@
                         <div class="panel panel-default" style="width: auto; display: inline-block">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    <span data-bind="text: description"></span>
+                                    <span data-bind="text: query.description"></span>
                                     <span class="glyphicon glyphicon-ok" style="color: #5cb85c" aria-hidden="true"></span>
                                     <span data-bind="text: hits"></span>
                                     <span class="glyphicon glyphicon-remove" style="color: #d9534f" aria-hidden="true"></span>
@@ -85,8 +85,8 @@
                             </div>
                             <div class="panel-footer">
                                 <button type="button" class="btn btn-primary btn-xs" data-bind="click: copyStateToClipboard"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
-                                <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></button>
-                                <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-primary btn-xs" data-bind="click: copyQueryToQueryInput"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-danger btn-xs" data-bind="click: deleteQuery"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>

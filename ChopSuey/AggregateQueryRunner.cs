@@ -1,19 +1,16 @@
 using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ChopSuey.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Streak.Core;
 
 namespace ChopSuey
 {
-    public delegate void Aggregate(Event evt, dynamic data, ref dynamic state);
-    public delegate dynamic Init();
-
-    public class AggregateQueryRunner
+    public class AggregateQueryRunner : IDisposable
     {
-        private readonly IEnumerable<Event> _streak;
+        private readonly Streak.Core.Streak _streak;
+        private readonly CancellationTokenSource _tokenSource;
         private dynamic _state;
         private readonly Aggregate _aggregate;
 
@@ -45,18 +42,24 @@ namespace ChopSuey
             _aggregate = LambdaCompiler.CreateLambda(query.Aggregate);
 
             //Create reader streak
-            _streak = new Streak.Core.Streak(query.Streak).Get(continuous: true);
+            _streak = new Streak.Core.Streak(query.Streak);
 
             //Initialize state
             _state = init();
+
+            //Run
+            _tokenSource = new CancellationTokenSource();
+            Run(_tokenSource.Token);
         }
 
-        public Task Run()
+        private void Run(CancellationToken token)
         {
-            return Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() =>
             {
-                foreach (var e in _streak)
+                foreach (var e in _streak.Get(continuous: true))
                 {
+                    if (token.IsCancellationRequested) return;
+
                     try
                     {
                         dynamic data = JObject.Parse(e.Data);
@@ -72,6 +75,12 @@ namespace ChopSuey
                     }
                 }
             }, TaskCreationOptions.LongRunning);
+        }
+
+        public void Dispose()
+        {
+            _tokenSource.Cancel();
+            _streak.Dispose();
         }
     }
 }
