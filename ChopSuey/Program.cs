@@ -20,9 +20,14 @@ namespace ChopSuey
         //TODO: Add support for Text and Binary query types
         //TODO: Add syntax Highlighting to query input
         //TODO: Parameterize start/stop/continuous
-        //TODO: Add footer to widgets with Delete, Copy State to Clipboard and Copy Query to Input buttons
+        //TODO: Add footer to widgets with Delete (don't forget to clean up Task and Streak), Copy State to Clipboard and Copy Query to Input buttons
         //TODO: Add imports/assemblies?
-        // > MoreLinq
+        // > ValueTuples
         //TODO: Add filter logs
+    }
+
+    public class Thing
+    {
+        public int Number { get; set; }
     }
 }
