@@ -20,9 +20,4 @@ namespace ChopSuey
         //TODO: Add support for Text and Binary query types
         //TODO: Add filter logs
     }
-
-    public class Thing
-    {
-        public int Number { get; set; }
-    }
 }
