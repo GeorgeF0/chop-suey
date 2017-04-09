@@ -21,10 +21,7 @@ namespace ChopSuey
         //TODO: Add syntax Highlighting to query input
         //TODO: Parameterize start/stop/continuous
         //TODO: Add footer to widgets with Delete, Copy State to Clipboard and Copy Query to Input buttons
-        //TODO: Add imports/assemblies? (make sure init can new-up Expandos)
-        // > Expando
-        // > RegExp
-        // > LINQ
+        //TODO: Add imports/assemblies?
         // > MoreLinq
         //TODO: Add filter logs
     }
