@@ -32,10 +32,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading" data-toggle="collapse" href="#new-query-panel-body" aria-expanded="false" aria-controls="new-query-panel-body" style="cursor: pointer">
                         <h1 class="panel-title">Add Query</h1>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body collapse" id="new-query-panel-body">
                         <div class="alert" role="alert" data-bind="css: {'alert-info': query.alertClassIsInfo(), 'alert-danger': query.alertClassIsDanger(), 'alert-success': query.alertClassIsSuccess()}"><strong data-bind="text: query.alertStrongText()"></strong><p data-bind="text: query.alertDetails()"></p></div>
                         <div class="form-group">
                             <label>Streak</label>
@@ -57,7 +57,7 @@
                             <input class="form-control" placeholder="Friendly name" data-bind="value: query.description" />
                         </div>
 
-                        <button class="btn btn-primary" onclick="createQuery()">Create</button>
+                        <button class="btn btn-primary" onclick="createQuery()"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Create</button>
                     </div>
                 </div>
             </div>
@@ -82,6 +82,11 @@
                                 </h3>
                             </div>
                             <div class="panel-body" data-bind="codemirror: state">
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-primary btn-xs" data-bind="click: copyStateToClipboard"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>

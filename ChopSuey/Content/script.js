@@ -1,4 +1,20 @@
-﻿// Knockout and state
+﻿// Clipboard
+
+// http://stackoverflow.com/questions/22581345/click-button-copy-to-clipboard-using-jquery
+// Jesus Christ JavaScript...
+function copyToClipboard(text) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+
+function copyStateToClipboard(element) {
+    copyToClipboard(element.state);
+}
+
+// Knockout and state
 
 ko.bindingHandlers.codemirror = {
     init: function (element, valueAccessor) {
