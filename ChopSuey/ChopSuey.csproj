@@ -161,6 +161,8 @@
   <ItemGroup>
     <Compile Include="AggregateQueries\AggregateQueryRunner.cs" />
     <Compile Include="AggregateQueries\AggregateQuery.cs" />
+    <Compile Include="Config\ConfigReader.cs" />
+    <Compile Include="Config\Configuration.cs" />
     <Compile Include="Nancy\Api.cs" />
     <Compile Include="Nancy\Bootstrapper.cs" />
     <Compile Include="LambdaCompiler.cs" />
@@ -171,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

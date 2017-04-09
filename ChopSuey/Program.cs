@@ -1,4 +1,5 @@
 ﻿using System;
+using ChopSuey.Config;
 using Microsoft.Owin.Hosting;
 using Owin;
 
@@ -8,7 +9,7 @@ namespace ChopSuey
     {
         public static void Main(string[] args)
         {
-            using (WebApp.Start("http://+:9999", app => app.UseNancy()))
+            using (WebApp.Start(ConfigReader.Configuration.WebServerAddress, app => app.UseNancy()))
             {
                 Console.WriteLine("Chop Suey started...");
                 Console.ReadLine();
