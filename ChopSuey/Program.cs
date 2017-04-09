@@ -15,12 +15,9 @@ namespace ChopSuey
             }
         }
 
-        //TODO: Show aggregate query on UI
-        // > Add "i" (info) icon with Init and Aggregate strings as tooltips
-        //TODO: Add support for Text and Binary query types
         //TODO: Add syntax Highlighting to query input
         //TODO: Parameterize start/stop/continuous
-        //TODO: Add footer to widgets with Delete (don't forget to clean up Task and Streak) button
+        //TODO: Add support for Text and Binary query types
         //TODO: Add filter logs
     }
 

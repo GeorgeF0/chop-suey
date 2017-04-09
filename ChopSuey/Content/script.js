@@ -12,6 +12,28 @@ function copyToClipboard(text) {
 
 // Knockout and state
 
+//http://stackoverflow.com/questions/16875773/bootstraps-tooltip-not-working-with-knockout-bindings-w-fiddle 
+ko.bindingHandlers.tooltip = {
+    init: function (element, valueAccessor) {
+        var local = ko.utils.unwrapObservable(valueAccessor());
+        var options = {};
+
+        ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+        ko.utils.extend(options, local);
+
+        $(element).tooltip(options);
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+            $(element).tooltip("destroy");
+        });
+    },
+    options: {
+        placement: "top",
+        trigger: "hover",
+        template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="white-space: pre; text-align: left; max-width: none"></div></div>'
+    }
+}; 
+
 ko.bindingHandlers.codemirror = {
     init: function (element, valueAccessor) {
         var value = ko.unwrap(valueAccessor());
@@ -62,9 +84,25 @@ function Query() {
     });
 }
 
+function RunningQuery(data) {
+    ko.mapping.fromJS(data, {}, this);
+
+    this.info = ko.computed(function () {
+        return `Streak:\n${this.query.streak()}\n\nInit:\n${this.query.init()}\n\nAggregate:\n${this.query.aggregate()}`;
+    }, this);
+}
+
 function AppViewModel() {
     this.query = new Query();
-    this.running = ko.observableArray([]);
+    this.running = ko.mapping.fromJS([],
+        {
+            key: function (data) {
+                return ko.utils.unwrapObservable(data.query.id);
+            },
+            create: function (options) {
+                return new RunningQuery(options.data);
+            }
+        });
 }
 
 var viewModel = new AppViewModel();
@@ -73,19 +111,19 @@ ko.applyBindings(viewModel);
 // Functions
 
 function copyQueryToQueryInput(element) {
-    viewModel.query.streak(element.query.streak);
-    viewModel.query.init(element.query.init);
-    viewModel.query.aggregate(element.query.aggregate);
-    viewModel.query.description(element.query.description);
+    viewModel.query.streak(element.query.streak());
+    viewModel.query.init(element.query.init());
+    viewModel.query.aggregate(element.query.aggregate());
+    viewModel.query.description(element.query.description());
 }
 
 function copyStateToClipboard(element) {
-    copyToClipboard(element.state);
+    copyToClipboard(element.state());
 }
 
 function deleteQuery(element) {
     $.ajax({
-        url: "api/query/" + element.query.id,
+        url: `api/query/${element.query.id()}`,
         type: "DELETE"
     });
 }
@@ -104,7 +142,7 @@ function createQuery() {
 function updateRunningQueries() {
     $.get("api/query")
         .done(data => {
-            viewModel.running(data);
+            ko.mapping.fromJS(data, viewModel.running);
             setTimeout(updateRunningQueries, 1000);
         })
         .fail(() => setTimeout(updateRunningQueries, 1000));
