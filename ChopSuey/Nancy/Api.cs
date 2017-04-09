@@ -1,8 +1,8 @@
-﻿using ChopSuey.Model;
+﻿using ChopSuey.AggregateQueries;
 using Nancy;
 using Nancy.ModelBinding;
 
-namespace ChopSuey
+namespace ChopSuey.Nancy
 {
     public class Api : NancyModule
     {
@@ -28,13 +28,5 @@ namespace ChopSuey
                 return 200;
             };
         }
-    }
-
-    public class QuerySummary
-    {
-        public int Hits { get; set; }
-        public int Errors { get; set; }
-        public string State { get; set; }
-        public AggregateQuery Query { get; set; }
     }
 }

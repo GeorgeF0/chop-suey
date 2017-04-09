@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Streak.Core;
 
-namespace ChopSuey.Model
+namespace ChopSuey.AggregateQueries
 {
     public interface IState
     {

@@ -1,7 +1,7 @@
 ﻿using Nancy;
 using Nancy.Conventions;
 
-namespace ChopSuey
+namespace ChopSuey.Nancy
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {

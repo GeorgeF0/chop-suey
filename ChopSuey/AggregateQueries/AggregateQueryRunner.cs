@@ -1,11 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ChopSuey.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ChopSuey
+namespace ChopSuey.AggregateQueries
 {
     public class AggregateQueryRunner : IDisposable
     {

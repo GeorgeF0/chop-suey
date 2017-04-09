@@ -1,6 +1,6 @@
 using System;
 
-namespace ChopSuey.Model
+namespace ChopSuey.AggregateQueries
 {
     public class AggregateQuery
     {
